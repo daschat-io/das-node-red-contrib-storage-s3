@@ -130,10 +130,10 @@ var s3storage = {
     },
     
     getFlows: function() {
-        return this.getArrayData("flow") ;
+        return this.getArrayData("flows") ;
     },
     saveFlows: function(flows) {
-        return this.saveData("flow", flows) ;
+        return this.saveData("flows", flows) ;
     },
     getCredentials: function() {
         return this.getData("credential") ;
