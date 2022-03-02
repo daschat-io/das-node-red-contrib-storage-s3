@@ -39,14 +39,14 @@ if (process.env.HTTP_PROXY) {
 function prepopulateFlows(resolve) {
     var params =  {};
     params.Bucket = s3BucketName;
-    params.Key = appname+"/"+"flow.json";
+    params.Key = appname+"/"+"flows.json";
     console.log("prepop flows") ;
     s3.getObject(params,function(err,doc) {
         if (err) {
             var promises = [];
-            if (fs.existsSync(__dirname+"/defaults/flow.json")) {
+            if (fs.existsSync(__dirname+"/defaults/flows.json")) {
                 try {
-                    var flow = fs.readFileSync(__dirname+"/defaults/flow.json","utf8");
+                    var flow = fs.readFileSync(__dirname+"/defaults/flows.json","utf8");
                     var flows = JSON.parse(flow);
                     console.log(">> Adding default flow");
                     promises.push(s3storage.saveFlows(flows));
@@ -57,9 +57,9 @@ function prepopulateFlows(resolve) {
             } else {
                 console.log(">> No default flow found");
             }
-/**             if (fs.existsSync(__dirname+"/defaults/flow_cred.json")) {
+/**             if (fs.existsSync(__dirname+"/defaults/flows_cred.json")) {
                 try {
-                    var cred = fs.readFileSync(__dirname+"/defaults/flow_cred.json","utf8");
+                    var cred = fs.readFileSync(__dirname+"/defaults/flows_cred.json","utf8");
                     var creds = JSON.parse(cred);
                     console.log(">> Adding default credentials");
                     promises.push(s3storage.saveCredentials(creds));
